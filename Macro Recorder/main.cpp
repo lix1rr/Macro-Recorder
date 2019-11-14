@@ -1,16 +1,40 @@
 #include <windows.h>
 #include "shortcuts.h"
 
+
 int main(int argc, char* argv[]) {
 	if (argc < 3) { return -1; }
 	if (std::strcmp(argv[1], "create") == 0) {
 		bool verbose = false;
-		if (argc > 3) {
-			if (std::strcmp(argv[2], "\\v")) {
-				verbose = true;
+		bool saveToFile = false;
+		bool runAfter = false;
 
+		for (int i = 2; i < argc; i++) {
+			if (strlen(argv[i]) == 2) {
+				if (argv[i][0] == '-') {
+					switch ((char)std::tolower(argv[i][1])) {
+						case 'v':
+							verbose = true;
+							break;
+						case 'f':
+							saveToFile = true;
+							break;
+						case 'r':
+							runAfter = true;
+							break;
+						default:
+							std::cout << (char)std::tolower(argv[i][1])  << 'v' <<std::endl;
+							std::cout << "Invalid argument: \"" << argv[i] << "\"";
+							exit(-2);
+
+					}
+				}
 			}
 		}
+		std::cout << (verbose ? "verbose" : "not verbose") << std::endl;
+		std::cout << (saveToFile ? "saveToFile" : "not saveToFile") << std::endl;
+		std::cout << (runAfter ? "runAfter" : "not runAfter") << std::endl;
+
 		Shortcut s = Shortcut::parse(std::string(argv[2]));
 		std::cout << "Macro sequence:" << std::endl;
 		for (int i = 0; i < s.actions.size(); i++) {
@@ -47,6 +71,9 @@ Shortcut Shortcut::parse(std::string str) {
 		} 
 		else if (c == 'T') {
 			timeToken = true;
+		}
+		else if (c == 'S') {
+			actions.push_back(new KeyAction(' '));
 		}
 		else {
 			actions.push_back(new KeyAction(c));
