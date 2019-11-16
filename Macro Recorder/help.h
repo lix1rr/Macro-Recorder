@@ -1,5 +1,6 @@
 const char* HELP_MESSAGE = 
-R""""(Macro-Recorder usage:
+R""""(
+Macro-Recorder usage:
 macro.exe [mode] [options]
 [mode]:
   macro [arguments/commmands]
@@ -38,5 +39,4 @@ macro.exe [mode] [options]
     Delete macros with the name (space seperated)
   help [no options]
     Displays this help page
-
 )"""";

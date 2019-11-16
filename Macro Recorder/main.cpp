@@ -132,22 +132,22 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-	else if (word.compare("list-windows")) {
+	else if (word.compare("list-windows") == 0) {
 		std::cout << "Not Implemented" << std::endl;
 		return -3;
 	}
-	else if (word.compare("list-macros")) {
+	else if (word.compare("list-macros") == 0) {
 		//TODO:
 		std::cout << "Not Implemented" << std::endl;
 		return -3;
 	}
-	else if (word.compare("delete")) {
+	else if (word.compare("delete") == 0) {
 		//TODO:
 		std::cout << "Not Implemented" << std::endl;
 		return -3;
 	}
-	else if (word.compare("help")) {
-		std::cout << HELP_MESSAGE << std::endl;
+	else if (word.compare("help") == 0) {
+		std::cout << HELP_MESSAGE;
 		return 0;
 	}
 	else {
