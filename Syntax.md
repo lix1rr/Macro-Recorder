@@ -10,11 +10,11 @@ macro.exe [mode] [options]
 [mode]:
   macro [arguments/commmands]
     Each argument must be seperated by a space.
-  list-windows [no options]
+  list-windows [no options] # Not implemented
     Lists all windows with their associated number
-  list-macros [no options]
+  list-macros [no options] # Not implemented
     Lists all the macros' names
-  delete [name1] [name2] [name3] ...
+  delete [name1] [name2] [name3] ... # Not implemented
     Delete macros with the name (space seperated)
   help [no options]
     Displays help page
@@ -24,10 +24,10 @@ macro.exe [mode] [options]
 **Arguments (only for the mode ``macro``):**
 ```
 -v                         verbose
--r                         run afterwards
--f=\"path/to/file.macro"   save to file
--s=\"name\"                save for name
--w=\"window1;window2\"     windows to run on (default = all)
+-r                         run afterwards # Not implemented
+-f=\"path/to/file.macro"   save to file # Not implemented
+-s=\"name\"                save for name # Not implemented
+-w=\"window1;window2\"     windows to run on (default = all) # Not implemented
                            all windows must be seperated by a semicolon
 ```
 **Commands (only for the mode ``macro``):**
@@ -35,6 +35,8 @@ macro.exe [mode] [options]
 keyboard down  "characters" = kd"characters"
 keyboard up    "characters" = ku"characters"
 keyboard typed "characters" = k"characters"
+
+Mouse Not Implemented
 
 left mouse button down      = m1d
 left mouse button up        = m1u
@@ -52,7 +54,7 @@ wait 50  miliseconds        = w50
 ```
 
 
-**Listing windows**:
+**Listing windows (Not implemented)**:
 
 If you want to run the macro on specific windows, you can run
 `macro.exe list windows`.
