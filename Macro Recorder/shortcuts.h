@@ -20,9 +20,12 @@ struct Shortcut {
 };
 class KeyAction: public Action {
 public:
+	enum Type{Up, Down, Typed};
+	Type type;
 	char key;
-	KeyAction(char c) { key = c; }
+	KeyAction(char c, Type t) { key = c; type = t; }
 	virtual void execute(bool verbose = false) override;
+	static void generate(Type t, std::string str, std::vector<Action*>* vec);
 	virtual std::string toString() override { return "KeyAction  key = " + std::string(1, key); }
 };
 class WaitAction: public Action {
