@@ -1,7 +1,7 @@
 # Macro-Recorder
 Macro-Recorder is a simple and easy to use application that allows you to write macros directly from the command line.
 
-For help on how to use it, see the file``Syntax.md``.
+For help on how to use it, see the file [``Syntax.md``](Syntax.md)
 
 ## Examples
 **Cookie Clicker:**
