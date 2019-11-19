@@ -1,6 +1,5 @@
 const char* HELP_MESSAGE = 
-R""""(
-Macro-Recorder usage:
+R""""(Macro-Recorder usage:
 macro.exe [mode] [options]
 [mode]:
   macro [arguments/commmands]

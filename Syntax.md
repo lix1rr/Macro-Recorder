@@ -38,12 +38,15 @@ keyboard typed "characters" = k"characters"
 
 left mouse button down      = m1d
 left mouse button up        = m1u
+left mouse click            = m1
 
 right mouse button down     = m2d
 right mouse button up       = m2u
+right mouse click           = m2
 
 middle mouse button down    = m3d
 middle mouse button up      = m3u
+middlemouse click           = m3
 
 scroll up by 1 line         = msu1
 scroll down by 1 line       = msd1

@@ -35,3 +35,15 @@ public:
 	WaitAction(int miliseconds) { time = miliseconds; }
 	virtual std::string toString() override { return "WaitAction waitTime = " + std::to_string(time);  }
 }; 
+
+class MouseAction : public Action {
+public:
+	enum Button {Left, Middle, Right};
+	enum Event {Down, Up , Click};
+	INPUT input;
+	MouseAction(MouseAction::Button b, MouseAction::Event e);
+	virtual void execute(bool verbose = false) override;
+	
+	virtual std::string toString() override{ return "MouseAction"; }
+
+};

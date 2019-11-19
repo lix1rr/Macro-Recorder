@@ -50,8 +50,7 @@ int main(int argc, char* argv[]) {
 		Checking which mode the user specified.
 	*/
 	if (word.compare("macro") == 0) {
-		for (size_t i = 2; i < argc; i++) {
-
+		for (int i = 2; i < argc; i++) {
 			if (strlen(argv[i]) == 2) {
 				if (argv[i][0] == '-') {
 					switch ((char)std::tolower(argv[i][1])) {
@@ -77,7 +76,6 @@ int main(int argc, char* argv[]) {
 					continue;
 				switch (str.at(0)) {
 					case 'k':
-
 						if (!(length >= 4)) {
 							std::cout << "Invalid command: \"" << str << "\"." << std::endl;
 							exit(-2);
@@ -107,12 +105,47 @@ int main(int argc, char* argv[]) {
 						}
 						break;
 					case 'm':
-						if (!(length >= 3)) {
+						if ((length > 4) | (length < 2)){
 							std::cout << "Invalid command: \"" << str << "\"." << std::endl;
 							exit(-2);
 						}
-						std::cout << "mouse not supported" << std::endl;
-						exit(-1000);
+						MouseAction::Button button;
+						MouseAction::Event event;
+						
+						
+
+						switch (str.at(1)) {
+							case '1':
+								button = MouseAction::Button::Left;
+								break;
+							case '2':
+								button = MouseAction::Button::Right;
+								break;
+							case '3':
+								button = MouseAction::Button::Middle;
+								break;
+							default:
+								std::cout << "Invalid command: \"" << str << "\"." << std::endl;
+								exit(-2);
+						}
+
+						if (length == 2) {
+							event = MouseAction::Event::Click;
+						}
+						else {
+							switch (str.at(2)) {
+								case 'd':
+									event = MouseAction::Event::Down;
+									break;
+								case 'u':
+									event = MouseAction::Event::Up;
+									break;
+								default:
+									std::cout << "Invalid command: \"" << str << "\"." << std::endl;
+									exit(-2);
+							}
+						}
+						actions.push_back(new MouseAction(button, event));
 						break;
 					case 'w': {
 						if (!(length >= 2)) {
@@ -239,4 +272,61 @@ void KeyAction::generate(Type t, std::string str, std::vector<Action*>* vec) {
 			}
 		}
 	}
+}
+
+
+void MouseAction::execute(bool verbose) {
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+MouseAction::MouseAction(MouseAction::Button b, MouseAction::Event e) {
+	input.type = INPUT_MOUSE;
+	input.mi.dx = 0;
+	input.mi.dy = 0;
+	input.mi.mouseData = 0;
+	input.mi.dwExtraInfo = NULL;
+	input.mi.time = 0;
+	switch (b) {
+		case Left:
+			switch (e) {
+				case Down:
+					input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+					break;
+				case Up:
+					input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+					break;
+				case Click:
+					input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP;
+					break;
+			}
+			break;
+		case Middle:
+			switch (e) {
+				case Down:
+					input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
+					break;
+				case Up:
+					input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+					break;
+				case Click:
+					input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN | MOUSEEVENTF_MIDDLEUP;
+					break;
+			}
+			break;
+		case Right:
+			switch (e) {
+				case Down:
+					input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+					break;
+				case Up:
+					input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+					break;
+				case Click:
+					input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP;
+					break;
+			}
+			break;
+	}
+	input.mi.dwFlags = input.mi.dwFlags | MOUSEEVENTF_MOVE;
+	
 }
